@@ -1,0 +1,38 @@
+Dependency Injection:
+	- Want to differentiate between a class that implements a stack and a class that extends a stack.
+	- Introduce an Injector that can inject an instance of some class that implements a stack when instantiating the interface stack.
+	- Differentiate between a class the implements an interface and is an implementation of the interface and a class that just abides by some interface and does more work (e.g. a class is Serializable, but it is not some instance of "Serializable")
+Templates vs Generic:
+	- A generic classes is similar to how c++ template classes work. They are classes that that are similar regardless of variable types or some other parameter. However each specialization must implement the same methods (possibly only limit the enforcement to the public methods only?)
+	- Generic Classes will automatically specialize themselves according to the implementation specified. However there should be a way to explicit specialization for a specific class or possibly for a set of classes that fit a specified criteria
+	- Template
+Compile Time Functionality:
+	- There should be a way to extract some information about a variable, function, class, ... etc.
+	- e.g. IsPrimitiveClass: are classes that does not require a complex constructor or destructor.
+Variable Declaration:
+	- Want it something similar to: Type<Specializations>[ArrSize] Name;
+	- e.g. "int<16bit> x;" will declare a variable x on the stack with type 16 bit integer.
+	- In case of integers they will have a specialization for Big Integers and possibly other specializations for other unconventional numbers.
+	- e.g. "char<ASCII> x; char<UTF8> y;" x and y will be a character however with different encoding.
+Entry Point:
+	- Multiple Entry points? One Entry point per Module?
+	- Some way to specificy entry point?
+	- If no entry point is specified, each global scope code will be executed in each file. However the order of execution between file is arbitrary. (Possibly parallelized)
+Arithmetic Operators:
+	- Some kind of integer division that returns both the result and the remainder in one operation?
+	- Add support for other primitive data types
+Logical Operators:
+	- XOR for Boolean?
+	- NAND
+	- NOR
+	- words instead of symbols?
+Bitwise Operators:
+	- NAND:
+	- NOR:
+	- Shift Right Logical:
+	- Shift Right Arithmetic:
+	- Shift Left:
+	- Rotate Right:
+	- Rotate Left:
+Functions:
+	- Multiple return values?

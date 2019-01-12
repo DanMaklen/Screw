@@ -1,0 +1,20 @@
+I have decided to write my story as I develop this project. Because why not?
+This project is intended to be a programing language along with its compiler/interrupter.
+I have already worked on couple of iterations of this language to learn about language and compiler design.
+This is a fresh start.
+
+In this iteration my focus will be on getting a basic coherent language working and interpreted first before taking any further steps.
+My focus will be on the front end part of the compiler rather than back end (hence it is going to be interpreted at first).
+I will not focus too much on the specification readability thought it should be detailed.
+I will make it as a bullet points divided.
+After getting the interpreter working on a subset of the language, I will either start working on back end part, or improve the specification, write the interpreter in the it's own language or add new features. Not decided yet.
+The features I want to be starting with are all the basic necessary stuff as well as functions and possible classes as well?
+So that will be:
+ 	- basic arithmetic and binary operations. Should I ignore floats for now?
+	- Variable declaration and assignment.
+	- Control constructs like if/case/branch, for/while/do/loops
+	- Functions (possibly ignore polymorphism?)
+	- Classes (possibly without any inheritance or complex concepts)
+I guess I will mark each of those things as a milestone with more milestones to be added in the future.
+I will divide the specifications into multiple files. Each file will be dedicated to a certain aspect (e.g. Classes and Object Oriented programing, Lexical Analysis, Semantic Analysis, ... etc.)
+There will be a file detected for future ideas. Hopefully the will be moved to other files as they are implemented.

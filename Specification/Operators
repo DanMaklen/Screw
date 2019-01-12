@@ -1,0 +1,16 @@
+Arithmetic:
+	- Addition:
+	- Subtraction:
+	- Multiplication:
+	- Division:
+	- Modulo:
+Logical:
+	- And:
+	- Or:
+	- XOR:
+	- NOT:
+Bitwise:
+	- And:
+	- Or:
+	- XOR:
+	- NOT:

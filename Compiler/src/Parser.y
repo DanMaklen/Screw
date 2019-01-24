@@ -1,26 +1,70 @@
 %code requires{
 	#include "Token.hpp"
 	#include "Logger.hpp"
+	#include "AST.hpp"
 	extern int yylex();
 	extern void yyerror(const char*, ...);
 }
 
 %union{
-	IntegerLiteral intLit;
+	IntegerLiteral intLiteral;
+	AST* astNode;
 }
 
-%token	<intLit>	IntegerLiteralToken
+%token 					PLUS HYPHEN_MINUS
+%token					ASTERISK SLASH PERCENT_SIGN
+%token					SEMICOLON
 
+%token	<intLiteral>	INTEGER_LITERAL
+
+%type	<astNode>		Expression
+%type	<astNode>		Rank0Expression Rank1Expression Rank2Expression
+%type	<astNode>		TerminalValue Screw
 %start Screw
 %%
-Screw: IntegerLiteralToken {
-		switch($1.intSize){
-			case IntegerLiteral::Size::INT8: Logger::Log(Logger::Type::INFO, int($1.value.int8)); break;
-			case IntegerLiteral::Size::INT16: Logger::Log(Logger::Type::INFO, $1.value.int16); break;
-			case IntegerLiteral::Size::INT32: Logger::Log(Logger::Type::INFO, $1.value.int32); break;
-			case IntegerLiteral::Size::INT64: Logger::Log(Logger::Type::INFO, $1.value.int64); break;
+Screw:
+		Expression{
+			$$ = $1;
 		}
-	}
-
-
+	;
+Expression:
+		Rank0Expression{
+			$$ = $1;
+		}
+	;
+Rank0Expression:
+		Rank1Expression{
+			$$ = $1;
+		}
+	|	Rank0Expression PLUS Rank1Expression{
+			$$ = new Expression(Expression::ADDITION, $1, $3);
+		}
+	|	Rank0Expression HYPHEN_MINUS Rank1Expression{
+			$$ = new Expression(Expression::SUBTRACTION, $1, $3);
+		}
+	;
+Rank1Expression:
+		Rank2Expression{
+			$$ = $1;
+		}
+	|	Rank1Expression ASTERISK Rank2Expression{
+			$$ = new Expression(Expression::MULTIPLICATION, $1, $3);
+		}
+	|	Rank1Expression SLASH Rank2Expression{
+			$$ = new Expression(Expression::DIVISION, $1, $3);
+		}
+	|	Rank1Expression PERCENT_SIGN Rank2Expression{
+			$$ = new Expression(Expression::REMAINDER, $1, $3);
+		}
+	;
+Rank2Expression:
+		TerminalValue{
+			$$ = $1;
+		}
+	;
+TerminalValue:
+		INTEGER_LITERAL{
+			$$ = new TerminalValue($1);
+		}
+	;
 %%

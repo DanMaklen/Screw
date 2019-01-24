@@ -13,7 +13,7 @@ OPATH	:= $(ODIR)/$(PREFIX)$(NAME)$(SUFFIX)
 SDIR	:= ./src
 HDIR	:= ./include
 BDIR 	:= ./bin
-TDIR	:= ./.temp
+TDIR	:= ./.gen
 SOURCE	:= $(wildcard $(SDIR)/*)
 BINARY	:= $(SOURCE:$(SDIR)/%=$(BDIR)/%.o)
 

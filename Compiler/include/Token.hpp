@@ -26,9 +26,9 @@ public:
 	bool signedInt;
 
 	IntegerLiteral() = default;
-	IntegerLiteral(const std::string& literal);
 	IntegerLiteral(const IntegerLiteral& obj) = default;
 	IntegerLiteral(IntegerLiteral&& obj) = default;
+	IntegerLiteral(const std::string& literal);
 
 	IntegerLiteral& operator=(const IntegerLiteral& obj) = default;
 };

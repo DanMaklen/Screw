@@ -1,16 +1,23 @@
-Arithmetic:
-	- Addition:
-	- Subtraction:
-	- Multiplication:
-	- Division:
-	- Modulo:
-Logical:
-	- And:
-	- Or:
-	- XOR:
-	- NOT:
-Bitwise:
-	- And:
-	- Or:
-	- XOR:
-	- NOT:
+By Type:
+	Arithmetic:
+		- Addition (+)
+		- Subtraction (-)
+		- Multiplication (*)
+		- Division (/)
+		- Modulo (%)
+	Logical:
+		- AND (and)
+		- OR: (or)
+		- XOR (xor)
+		- NOT (not)
+	Bitwise:
+		- And (&)
+		- Or (|)
+		- XOR (^)
+		- NOT (~)
+By Precedence:
+	Rank 0:
+	Rank 1:
+	Rank 2:
+	Rank 3:
+	Rank 4:

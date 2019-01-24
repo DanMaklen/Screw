@@ -21,6 +21,7 @@ Entry Point:
 Arithmetic Operators:
 	- Some kind of integer division that returns both the result and the remainder in one operation?
 	- Add support for other primitive data types
+	- ** power, and root
 Logical Operators:
 	- XOR for Boolean?
 	- NAND
@@ -36,3 +37,4 @@ Bitwise Operators:
 	- Rotate Left:
 Functions:
 	- Multiple return values?
+	- Operator overloads can have attributes like [associative] and [commutative], [distributive]?

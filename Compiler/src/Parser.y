@@ -1,9 +1,10 @@
+%param {AST*& ast}
 %code requires{
 	#include "Token.hpp"
 	#include "Logger.hpp"
 	#include "AST.hpp"
-	extern int yylex();
-	extern void yyerror(const char*, ...);
+	extern int yylex(AST*&);
+	extern void yyerror(AST*&, const char*, ...);
 }
 
 %union{
@@ -20,11 +21,12 @@
 %type	<astNode>		Expression
 %type	<astNode>		Rank0Expression Rank1Expression Rank2Expression
 %type	<astNode>		TerminalValue Screw
+
 %start Screw
 %%
 Screw:
 		Expression{
-			$$ = $1;
+			ast = $1;
 		}
 	;
 Expression:

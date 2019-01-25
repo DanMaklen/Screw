@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "AST.hpp"
 
 class Parser{
 	Parser(const Parser&) = delete;
@@ -8,5 +9,5 @@ public:
 	Parser() = default;
 	Parser(Parser&&) = default;
 
-	void Parse(const std::string& filePath);
+	AST* Parse(const std::string& filePath);
 };

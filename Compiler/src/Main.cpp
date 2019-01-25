@@ -8,6 +8,8 @@ int main(int argc, const char * argv[]){
 		return 0;
 	}
 	Parser parser;
-	parser.Parse(argv[1]);
+
+	AST* ast;
+	ast = parser.Parse(argv[1]);
 	return 0;
 }

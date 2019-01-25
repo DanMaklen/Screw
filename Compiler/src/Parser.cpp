@@ -1,12 +1,14 @@
 #include "Parser.hpp"
 using namespace std;
 
-extern int yyparse();
+extern int yyparse(AST*&);
 extern void yyrestart(FILE*);
 
-void Parser::Parse(const string& filePath){
+AST* Parser::Parse(const string& filePath){
 	FILE* file = fopen(filePath.c_str(), "r");
+	AST* ast;
 	yyrestart(file);
-	yyparse();
+	yyparse(ast);
 	fclose(file);
+	return ast;
 }

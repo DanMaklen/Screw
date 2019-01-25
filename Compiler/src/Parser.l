@@ -4,9 +4,9 @@
 %option batch
 
 %{
-	// #include <cctype>
-	// #include "AST.h"
-	// #define YY_DECL int yylex(AST& ast, Context& context)
+	#include "Token.hpp"
+	#include "AST.hpp"
+	#define YY_DECL int yylex(AST*& ast)
 %}
 
 AllChar														[\f\v\r\n\t -~]
@@ -53,5 +53,5 @@ HDigit														[0-9a-fA-F]
 {WS}+														{}
 
 	/*Default Rule*/
-.															{yyerror("Unrecognized character %c (%d).", *yytext, int(*yytext));}	//Default Rule
+.															{yyerror(ast, "Unrecognized character %c (%d).", *yytext, int(*yytext));}	//Default Rule
 %%

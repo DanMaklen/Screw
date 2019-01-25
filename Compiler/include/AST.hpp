@@ -32,7 +32,6 @@ public:
 	};
 private:
 	Operation op;
-	AST* operand[3];
 public:
 	Expression(Operation op, AST* operand);
 	Expression(Operation op, AST* operand1, AST* operand2);

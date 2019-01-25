@@ -2,10 +2,11 @@
 #include <iostream>
 #include <cstdio>
 #include <cstdarg>
+#include "AST.hpp"
 using namespace std;
 
 extern int yylineno;
-void yyerror(const char* s, ...){
+void yyerror(AST*& ast, const char* s, ...){
 	printf("Line %d: ", yylineno);
 	va_list ap;
 	va_start(ap, s);

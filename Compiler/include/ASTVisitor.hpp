@@ -3,11 +3,15 @@
 
 class ASTVisitor{
 private:
-	virtual void ProcessExpression(const AST* ast);
-	virtual void ProcessTerminalValue(const AST* ast);
+	virtual void ProcessExpression(const Expression* ast);
+	virtual void ProcessTerminalValue(const TerminalValue* ast);
 protected:
 	void Dispatch(AST* ast);
 public:
+	ASTVisitor() = default;
+	ASTVisitor(const ASTVisitor&) = default;
+	ASTVisitor(ASTVisitor&&) = default;
+	
 	virtual void Visit(AST* ast) = 0;
 };
 

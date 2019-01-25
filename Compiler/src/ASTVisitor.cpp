@@ -3,12 +3,12 @@
 #include <queue>
 using namespace std;
 
-void ASTVisitor::ProcessExpression(const AST* ast){}
-void ASTVisitor::ProcessTerminalValue(const AST* ast){}
+void ASTVisitor::ProcessExpression(const Expression* ast){}
+void ASTVisitor::ProcessTerminalValue(const TerminalValue* ast){}
 void ASTVisitor::Dispatch(AST* ast){
 	switch(ast->GetASTNodeType()){
-	case ASTNodeType::EXPRESSION: this->ProcessExpression(ast); break;
-	case ASTNodeType::TERMINAL_VALUE: this->ProcessTerminalValue(ast); break;
+	case ASTNodeType::EXPRESSION: this->ProcessExpression(dynamic_cast<Expression*>(ast)); break;
+	case ASTNodeType::TERMINAL_VALUE: this->ProcessTerminalValue(dynamic_cast<TerminalValue*>(ast)); break;
 	default: Logger::Log(Logger::Type::ERROR, "Unknown ASTNodeType ", ast->GetASTNodeType());
 	}
 }

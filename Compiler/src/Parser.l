@@ -37,6 +37,8 @@ HDigit														[0-9a-fA-F]
 
 	/*Punctuation*/
 [;]															{return SEMICOLON;}
+[(]															{return LEFT_PARENTHESIS;}
+[)]															{return RIGHT_PARENTHESIS;}
 
 	/*Integer Literal*/
 (0[bB]){BDigit}+(`{BDigit}+)*((s|u)?int(8|16|32|64)?)?		|

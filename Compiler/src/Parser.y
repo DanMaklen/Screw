@@ -12,9 +12,8 @@
 	AST* astNode;
 }
 
-%token 					PLUS HYPHEN_MINUS
-%token					ASTERISK SLASH PERCENT_SIGN
-%token					SEMICOLON
+%token 					PLUS HYPHEN_MINUS ASTERISK SLASH PERCENT_SIGN
+%token					SEMICOLON LEFT_PARENTHESIS RIGHT_PARENTHESIS
 
 %token	<intLiteral>	INTEGER_LITERAL
 
@@ -62,6 +61,9 @@ Rank1Expression:
 Rank2Expression:
 		TerminalValue{
 			$$ = $1;
+		}
+	|	LEFT_PARENTHESIS Expression RIGHT_PARENTHESIS{
+			$$ = $2;
 		}
 	;
 TerminalValue:

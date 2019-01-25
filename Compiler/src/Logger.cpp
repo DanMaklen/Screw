@@ -1,5 +1,4 @@
 #include "Logger.hpp"
-#include <iostream>
 #include <cstdio>
 #include <cstdarg>
 #include "AST.hpp"
@@ -19,6 +18,7 @@ string Logger::MessageHeader(Type type){
 		case Type::ERROR: return "ERROR::";
 		case Type::WARNING: return "WARNING::";
 		case Type::INFO: return "INFO::";
+		case Type::DEBUG: return "DEBUG::";
 		default: return "::";
 	}
 }

@@ -7,7 +7,8 @@ public:
 	enum Type{
 		ERROR,
 		WARNING,
-		INFO
+		INFO,
+		DEBUG
 	};
 private:
 	template<typename T>
@@ -22,10 +23,13 @@ private:
 
 	static std::string MessageHeader(Type type);
 public:
-
 	template<typename... Args>
 	static void Log(Type type, Args&&... args){
 		std::cout << MessageHeader(type) << ' ';
 		Log(args...);
+	}
+	template<typename... Args>
+	static void Debug(Args&&... args){
+		Log(Type::DEBUG, args...);
 	}
 };

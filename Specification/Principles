@@ -1,9 +1,11 @@
 Language Design Principles:
-	- A Programming Language should expose functionality and provide detailed control to the developer
-	- A Programming Language should assist the developer the developer in following best practices, but provide a way to override such ristrictions
+	- A Programming Language should expose functionality and provide detailed control to the developer.
+	- A Programming Language should assist the developer the developer in following best practices, but provide a way to override such ristrictions.
 
 General Programming Principles:
 	- Single Responsibility Principle:
-		Every entity (Function/Method, Class, Module, Variable, Program) should be responsible for 1 and only 1 thing
+		Every entity (Function/Method, Class, Module, Variable, Program) should be responsible for 1 and only 1 thing.
 	- Responsibility Locality:
-		Every responsibility should be located in a single location or grouped under a single collection
+		Every responsibility should be located in a single location or grouped under a single collection.
+	- Namespaced Libraries' Code:
+		Libraries's code should be under one or more namespaces. Only leaf programs are allowed to violate this principle.

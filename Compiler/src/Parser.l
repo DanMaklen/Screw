@@ -4,8 +4,6 @@
 %option batch
 
 %{
-	#include "Token.hpp"
-	#include "AST.hpp"
 	#define YY_DECL int yylex(AST*& ast)
 %}
 
@@ -45,7 +43,7 @@ HDigit														[0-9a-fA-F]
 (0[tT]){TDigit}+(`{TDigit}+)*((s|u)?int(8|16|32|64)?)?		|
 (0[oOcC]){ODigit}+(`{ODigit}+)*((s|u)?int(8|16|32|64)?)?	|
 (0[dD])?{DDigit}+(`{DDigit}+)*((s|u)?int(8|16|32|64)?)?		|
-(0[xXhH]){HDigit}+(`{HDigit}+)*((s|u)?int(8|16|32|64)?)?	{yylval.intLiteral = IntegerLiteral(yytext); return INTEGER_LITERAL;}
+(0[xXhH]){HDigit}+(`{HDigit}+)*((s|u)?int(8|16|32|64)?)?	{yylval.tokenString = yytext; return INTEGER_LITERAL;}
 
 "/?"{nWS}*						/*Word Comment*/			{}
 "//"{nNL}*						/*Line Comment*/			{}

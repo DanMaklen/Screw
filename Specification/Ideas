@@ -41,3 +41,5 @@ Functions & Methods:
 	- A way to automatically evaluate complexity and a way to override it
 Parsing:
 	- Differentiate between syntactical include/imports and semantical includes/imports
+Principles Restriction:
+	- Warn when packaging for a dll or library while having code in the global namespace

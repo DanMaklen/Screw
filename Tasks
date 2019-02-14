@@ -1,3 +1,17 @@
--AST
--Intermediate Language
--Automate Testing
+- Annotated AST
+- Visitor on Annotated AST
+- Intermediate Language
+- Automate Testing
+- Line number and compile time error reporting
+- Make makefile support sub directories
+
+Need To Do Before Next Stage in the Bootstrap:
+	- Integer Arithmetic Operations (+, -, *, /, %)
+	- Boolean Operations (and, or, not, <, >, <=, >=, ==, !=)
+	- Bitwise Operations (&, |, ^, ~, >>, <<)
+	- Control Statements (if, case, for, while)
+	- Variables (value, and pointers)
+	- I/O (Console and Files)
+	- Structures, Classes
+	- Linking Multiple Files (or linking)
+	- Libraries Support

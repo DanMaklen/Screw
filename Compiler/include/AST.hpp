@@ -1,12 +1,14 @@
 #pragma once
-#include "Token.hpp"
 #include <vector>
+#include <string>
 
-enum ASTNodeType{
-	EXPRESSION,
-	TERMINAL_VALUE
-};
+/***** Abstract Syntax Tree *****/
 class AST{
+public:
+	enum ASTNodeType{
+		EXPRESSION,
+		INTEGER_LITERAL
+	};
 protected:
 	std::vector<AST*> children;
 
@@ -20,7 +22,9 @@ public:
 	const std::vector<AST*>& GetChildren() const;
 	virtual ASTNodeType GetASTNodeType() const  = 0;
 };
+typedef AST::ASTNodeType ASTNodeType;
 
+/***** Expression *****/
 class Expression : public AST{
 public:
 	enum Operation{
@@ -38,20 +42,40 @@ public:
 	Expression(Operation op, AST* operand1, AST* operand2, AST* operand3);
 
 	virtual ASTNodeType GetASTNodeType() const;
+	Operation GetOperation() const;
 };
 
-class TerminalValue : public AST{
+/***** Integer Literal *****/
+class IntegerLiteral : public AST{
 public:
-	enum OperandType{
-		INTEGER_LITERAL
+	enum Size{
+		INT8,
+		INT16,
+		INT32,
+		INT64
 	};
 private:
-	OperandType type;
-	union{
-		IntegerLiteral intLiteral;
-	} value;
+	bool HasBasePrefix(const std::string& literal);
+	int GetBase(const std::string& literal);
+	Size GetIntegerSize(const std::string& literal);
+	int GetDigitValue(char);
+	long long GetValue(const std::string& literal, int base);
 public:
-	TerminalValue(const IntegerLiteral& intLiteral);
+	union{
+		unsigned char int8;
+		unsigned short int16;
+		unsigned int int32;
+		unsigned long long int64;
+	} value;
+	Size intSize;
+	bool signedInt;
+
+	IntegerLiteral() = default;
+	IntegerLiteral(const IntegerLiteral& obj) = default;
+	IntegerLiteral(IntegerLiteral&& obj) = default;
+	IntegerLiteral(const std::string& literal);
+
+	IntegerLiteral& operator=(const IntegerLiteral& obj) = default;
 
 	virtual ASTNodeType GetASTNodeType() const;
 };

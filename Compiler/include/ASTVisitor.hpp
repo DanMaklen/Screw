@@ -4,14 +4,14 @@
 class ASTVisitor{
 private:
 	virtual void ProcessExpression(const Expression* ast);
-	virtual void ProcessTerminalValue(const TerminalValue* ast);
+	virtual void ProcessIntegerLiteral(const IntegerLiteral* ast);
 protected:
 	void Dispatch(AST* ast);
 public:
 	ASTVisitor() = default;
 	ASTVisitor(const ASTVisitor&) = default;
 	ASTVisitor(ASTVisitor&&) = default;
-	
+
 	virtual void Visit(AST* ast) = 0;
 };
 

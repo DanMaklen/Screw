@@ -1,25 +1,25 @@
 %param {AST*& ast}
 %code requires{
-	#include "Token.hpp"
 	#include "Logger.hpp"
 	#include "AST.hpp"
+	#include <string>
+	using namespace std;
 	extern int yylex(AST*&);
 	extern void yyerror(AST*&, const char*, ...);
 }
 
 %union{
-	IntegerLiteral intLiteral;
+	const char* tokenString;
 	AST* astNode;
 }
 
 %token 					PLUS HYPHEN_MINUS ASTERISK SLASH PERCENT_SIGN
 %token					SEMICOLON LEFT_PARENTHESIS RIGHT_PARENTHESIS
 
-%token	<intLiteral>	INTEGER_LITERAL
+%token	<tokenString>	INTEGER_LITERAL
 
 %type	<astNode>		Expression
 %type	<astNode>		Rank0Expression Rank1Expression Rank2Expression
-%type	<astNode>		TerminalValue Screw
 
 %start Screw
 %%
@@ -59,16 +59,11 @@ Rank1Expression:
 		}
 	;
 Rank2Expression:
-		TerminalValue{
-			$$ = $1;
+		INTEGER_LITERAL{
+			$$ = new IntegerLiteral($1);
 		}
 	|	LEFT_PARENTHESIS Expression RIGHT_PARENTHESIS{
 			$$ = $2;
-		}
-	;
-TerminalValue:
-		INTEGER_LITERAL{
-			$$ = new TerminalValue($1);
 		}
 	;
 %%

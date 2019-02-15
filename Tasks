@@ -8,10 +8,11 @@
 Need To Do Before Next Stage in the Bootstrap:
 	- Integer Arithmetic Operations (+, -, *, /, %)
 	- Boolean Operations (and, or, not, <, >, <=, >=, ==, !=)
-	- Bitwise Operations (&, |, ^, ~, >>, <<)
-	- Control Statements (if, case, for, while)
+	- Bitwise Operations (~, &, |, ^, >>, <<)
+	- Control Statements (if, while)
 	- Variables (value, and pointers)
 	- I/O (Console and Files)
 	- Functions, Structures, Classes
 	- Linking Multiple Files (or linking)
+	- Types: char, integers, boolean
 	- Libraries Support

@@ -4,20 +4,34 @@ By Type:
 		- Subtraction (-)
 		- Multiplication (*)
 		- Division (/)
-		- Modulo (%)
+		- Remainder (%)
 	Logical:
 		- AND (and)
 		- OR: (or)
-		- XOR (xor)
 		- NOT (not)
 	Bitwise:
 		- And (&)
 		- Or (|)
 		- XOR (^)
 		- NOT (~)
+		- Shift Left (<<)
+		- Shift Right (>>)
+	Comparison:
+		- Equal (==)
+		- Not Equal (!=)
+		- Less Than (<)
+		- Less Than or Equal (<=)
+		- Greater Than (>)
+		- Greater Than or Equal (>=)
 By Precedence:
 	Rank 0:
-	Rank 1:
+		and, or
 	Rank 2:
+		==, !=, <, <=, >, >=
 	Rank 3:
+		+, -
 	Rank 4:
+		*, /, %
+	Rank 5:
+		- (unary), + (unary)
+		not

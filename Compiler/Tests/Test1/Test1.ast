@@ -1,0 +1,60 @@
+{
+	"ASTNodeType": "EXPRESSION",
+	"Attributes": {
+		"Operation": "/"
+	},
+	"Children": [
+		{
+			"ASTNodeType": "EXPRESSION",
+			"Attributes": {
+				"Operation": "+"
+			},
+			"Children": [
+				{
+					"ASTNodeType": "INTEGER_LITERAL",
+					"Attributes": {
+						"value": 5,
+						"size": "INT32",
+						"signedInt": true
+					},
+					"Children": []
+				},
+				{
+					"ASTNodeType": "EXPRESSION",
+					"Attributes": {
+						"Operation": "*"
+					},
+					"Children": [
+						{
+							"ASTNodeType": "INTEGER_LITERAL",
+							"Attributes": {
+								"value": 1,
+								"size": "INT32",
+								"signedInt": true
+							},
+							"Children": []
+						},
+						{
+							"ASTNodeType": "INTEGER_LITERAL",
+							"Attributes": {
+								"value": 6,
+								"size": "INT32",
+								"signedInt": true
+							},
+							"Children": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"ASTNodeType": "INTEGER_LITERAL",
+			"Attributes": {
+				"value": 4,
+				"size": "INT32",
+				"signedInt": true
+			},
+			"Children": []
+		}
+	]
+}

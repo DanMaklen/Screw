@@ -6,7 +6,7 @@ TYPE 	:= EXEC
 NAME 	:= screw
 PREFIX 	:=
 SUFFIX 	:= .out
-ODIR 	:= .
+ODIR 	:= ./out
 OPATH	:= $(ODIR)/$(PREFIX)$(NAME)$(SUFFIX)
 
 # Source, include directory and files

@@ -5,7 +5,7 @@
 /***** Abstract Syntax Tree *****/
 class AST{
 public:
-	enum ASTNodeType{
+	enum Type{
 		EXPRESSION,
 		INTEGER_LITERAL
 	};
@@ -20,9 +20,9 @@ protected:
 	AST& operator=(const AST& obj) = default;
 public:
 	const std::vector<AST*>& GetChildren() const;
-	virtual ASTNodeType GetASTNodeType() const  = 0;
+	virtual Type GetASTNodeType() const  = 0;
 };
-typedef AST::ASTNodeType ASTNodeType;
+typedef AST::Type ASTNodeType;
 
 /***** Expression *****/
 class Expression : public AST{
@@ -34,7 +34,7 @@ public:
 		DIVISION,
 		REMAINDER
 	};
-private:
+public:
 	Operation op;
 public:
 	Expression(Operation op, AST* operand);

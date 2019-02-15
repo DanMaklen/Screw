@@ -7,9 +7,9 @@ void ASTVisitor::ProcessExpression(const Expression* ast){}
 void ASTVisitor::ProcessIntegerLiteral(const IntegerLiteral* ast){}
 void ASTVisitor::Dispatch(AST* ast){
 	switch(ast->GetASTNodeType()){
-	case ASTNodeType::EXPRESSION: this->ProcessExpression(dynamic_cast<Expression*>(ast)); break;
-	case ASTNodeType::INTEGER_LITERAL: this->ProcessIntegerLiteral(dynamic_cast<IntegerLiteral*>(ast)); break;
-	default: Logger::Log(Logger::Type::ERROR, "Unknown ASTNodeType ", ast->GetASTNodeType());
+		case ASTNodeType::EXPRESSION: this->ProcessExpression(dynamic_cast<Expression*>(ast)); break;
+		case ASTNodeType::INTEGER_LITERAL: this->ProcessIntegerLiteral(dynamic_cast<IntegerLiteral*>(ast)); break;
+		default: Logger::Log(Logger::Type::ERROR, "Unknown ASTNodeType ", ast->GetASTNodeType());
 	}
 }
 

@@ -43,3 +43,6 @@ Parsing:
 	- Differentiate between syntactical include/imports and semantical includes/imports
 Principles Restriction:
 	- Warn when packaging for a dll or library while having code in the global namespace
+Libraries:
+	- Option to partially compile libraries only to the intermediate Language (i.e. front-end only).
+	- Finish compiling the library when linking.

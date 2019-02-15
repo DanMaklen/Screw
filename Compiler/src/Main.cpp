@@ -1,6 +1,7 @@
 #include "Logger.hpp"
 #include "Parser.hpp"
 #include "AST.hpp"
+#include "ASTFileWriter.hpp"
 
 long long eval(const AST* ast){
 	switch(ast->GetASTNodeType()){
@@ -38,6 +39,7 @@ int main(int argc, const char * argv[]){
 
 	AST* ast;
 	ast = parser.Parse(argv[1]);
-	Logger::Debug(eval(ast));
+	ASTFileWriter astFile("./out/test.ast");
+	astFile.WriteAST(ast);
 	return 0;
 }

@@ -66,3 +66,15 @@ IntegerLiteral::IntegerLiteral(const string& literal){
 ASTNodeType IntegerLiteral::GetASTNodeType() const{
 	return ASTNodeType::INTEGER_LITERAL;
 }
+
+/***** Boolean Literal *****/
+BooleanLiteral::BooleanLiteral(const string& literal) : value(literal=="true"){}
+ASTNodeType BooleanLiteral::GetASTNodeType() const{
+	return ASTNodeType::BOOLEAN_LITERAL;
+}
+
+/***** Identifier *****/
+Identifier::Identifier(const string& symbol) : symbol(symbol){}
+ASTNodeType Identifier::GetASTNodeType() const{
+	return ASTNodeType::IDENTIFIER;
+}

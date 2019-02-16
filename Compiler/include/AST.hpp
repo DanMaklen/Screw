@@ -7,7 +7,9 @@ class AST{
 public:
 	enum Type{
 		EXPRESSION,
-		INTEGER_LITERAL
+		INTEGER_LITERAL,
+		BOOLEAN_LITERAL,
+		IDENTIFIER
 	};
 protected:
 	std::vector<AST*> children;
@@ -28,11 +30,28 @@ typedef AST::Type ASTNodeType;
 class Expression : public AST{
 public:
 	enum Operation{
+		POSITIVE,
+		NEGATIVE,
 		ADDITION,
 		SUBTRACTION,
 		MULTIPLICATION,
 		DIVISION,
-		REMAINDER
+		REMAINDER,
+		LOGICAL_NOT,
+		LOGICAL_AND,
+		LOGICAL_OR,
+		EQ,
+		NEQ,
+		LT,
+		LTEQ,
+		GT,
+		GTEQ,
+		BITWISE_NOT,
+		BITWISE_AND,
+		BITWISE_OR,
+		BITWISE_XOR,
+		SHIFT_LEFT,
+		SHIFT_RIGHT
 	};
 public:
 	Operation op;
@@ -76,6 +95,36 @@ public:
 	IntegerLiteral(const std::string& literal);
 
 	IntegerLiteral& operator=(const IntegerLiteral& obj) = default;
+
+	virtual ASTNodeType GetASTNodeType() const;
+};
+
+/***** Boolean Literal *****/
+class BooleanLiteral : public AST{
+public:
+	bool value;
+public:
+	BooleanLiteral() = default;
+	BooleanLiteral(const BooleanLiteral& obj) = default;
+	BooleanLiteral(BooleanLiteral&& obj) = default;
+	BooleanLiteral(const std::string& literal);
+
+	BooleanLiteral& operator=(const BooleanLiteral& obj) = default;
+
+	virtual ASTNodeType GetASTNodeType() const;
+};
+
+/***** Identifier *****/
+class Identifier : public AST{
+public:
+	std::string symbol;
+public:
+	Identifier() = default;
+	Identifier(const Identifier& obj) = default;
+	Identifier(Identifier&& obj) = default;
+	Identifier(const std::string& symbol);
+
+	Identifier& operator=(const Identifier& obj) = default;
 
 	virtual ASTNodeType GetASTNodeType() const;
 };

@@ -5,10 +5,14 @@ using namespace std;
 
 void ASTVisitor::ProcessExpression(const Expression* ast){}
 void ASTVisitor::ProcessIntegerLiteral(const IntegerLiteral* ast){}
+void ASTVisitor::ProcessBooleanLiteral(const BooleanLiteral* ast){}
+void ASTVisitor::ProcessIdentifier(const Identifier* ast){}
 void ASTVisitor::Dispatch(AST* ast){
 	switch(ast->GetASTNodeType()){
 		case ASTNodeType::EXPRESSION: this->ProcessExpression(dynamic_cast<Expression*>(ast)); break;
 		case ASTNodeType::INTEGER_LITERAL: this->ProcessIntegerLiteral(dynamic_cast<IntegerLiteral*>(ast)); break;
+		case ASTNodeType::BOOLEAN_LITERAL: this->ProcessBooleanLiteral(dynamic_cast<BooleanLiteral*>(ast)); break;
+		case ASTNodeType::IDENTIFIER: this->ProcessIdentifier(dynamic_cast<Identifier*>(ast)); break;
 		default: Logger::Log(Logger::Type::ERROR, "Unknown ASTNodeType ", ast->GetASTNodeType());
 	}
 }

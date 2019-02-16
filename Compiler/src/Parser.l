@@ -27,24 +27,57 @@ HDigit														[0-9a-fA-F]
 
 %%
 	/*Arithmatic Operators*/
-[+]															{return PLUS;}
-[-]															{return HYPHEN_MINUS;}
-[*]															{return ASTERISK;}
-[/]															{return SLASH;}
-[%]															{return PERCENT_SIGN;}
+\+															{return PLUS;}
+-															{return MINUS;}
+\*															{return ASTERISK;}
+\/															{return SLASH;}
+%															{return PERCENT;}
+
+	/*Logical Operators*/
+not															{return NOT;}
+and															{return AND;}
+or															{return OR;}
+
+	/*Comparison Operators*/
+==															{return EQ;}
+!=															{return NEQ;}
+\<															{return LT;}
+\<=															{return LTEQ;}
+\>															{return GT;}
+\>=															{return GTEQ;}
+
+	/*Bitwise Operators*/
+~															{return BITWISE_NOT;}
+&															{return BITWISE_AND;}
+\|															{return BITWISE_OR;}
+\^															{return BITWISE_XOR;}
+\<\<														{return SHIFT_LEFT;}
+\>\>														{return SHIFT_RIGHT;}
 
 	/*Punctuation*/
 [;]															{return SEMICOLON;}
 [(]															{return LEFT_PARENTHESIS;}
 [)]															{return RIGHT_PARENTHESIS;}
 
-	/*Integer Literal*/
-(0[bB]){BDigit}+(`{BDigit}+)*((s|u)?int(8|16|32|64)?)?		|
-(0[tT]){TDigit}+(`{TDigit}+)*((s|u)?int(8|16|32|64)?)?		|
-(0[oOcC]){ODigit}+(`{ODigit}+)*((s|u)?int(8|16|32|64)?)?	|
-(0[dD])?{DDigit}+(`{DDigit}+)*((s|u)?int(8|16|32|64)?)?		|
-(0[xXhH]){HDigit}+(`{HDigit}+)*((s|u)?int(8|16|32|64)?)?	{yylval.tokenString = yytext; return INTEGER_LITERAL;}
+	/*Reserved Words*/
+if															{return IF;}
+while														{return WHILE;}
 
+	/*Integer Literal*/
+(0[bB]){BDigit}+(`{BDigit}+)*([su]?int(8|16|32|64)?)?		|
+(0[tT]){TDigit}+(`{TDigit}+)*([su]?int(8|16|32|64)?)?		|
+(0[oOcC]){ODigit}+(`{ODigit}+)*([su]?int(8|16|32|64)?)?		|
+(0[dD])?{DDigit}+(`{DDigit}+)*([su]?int(8|16|32|64)?)?		|
+(0[xXhH]){HDigit}+(`{HDigit}+)*([su]?int(8|16|32|64)?)?		{yylval.tokenString = yytext; return INTEGER_LITERAL;}
+
+	/*Boolean Literal*/
+true														|
+false														{yylval.tokenString = yytext; return BOOLEAN_LITERAL;}
+
+	/*Identifier*/
+[_a-zA-Z][_@a-zA-Z0-9]*										{yylval.tokenString = yytext; return IDENTIFIER;}
+
+	/*Comments*/
 "/?"{nWS}*						/*Word Comment*/			{}
 "//"{nNL}*						/*Line Comment*/			{}
 "/*"[/]*([^/]|[^*][/])*"*/"		/*Multi-Line Comment*/		{}

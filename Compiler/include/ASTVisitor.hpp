@@ -5,6 +5,8 @@ class ASTVisitor{
 private:
 	virtual void ProcessExpression(const Expression* ast);
 	virtual void ProcessIntegerLiteral(const IntegerLiteral* ast);
+	virtual void ProcessBooleanLiteral(const BooleanLiteral* ast);
+	virtual void ProcessIdentifier(const Identifier* ast);
 protected:
 	void Dispatch(AST* ast);
 public:

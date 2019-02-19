@@ -7,12 +7,18 @@ void ASTVisitor::ProcessExpression(const Expression* ast){}
 void ASTVisitor::ProcessIntegerLiteral(const IntegerLiteral* ast){}
 void ASTVisitor::ProcessBooleanLiteral(const BooleanLiteral* ast){}
 void ASTVisitor::ProcessIdentifier(const Identifier* ast){}
+void ASTVisitor::ProcessStatementList(const StatementList* ast){}
+void ASTVisitor::ProcessIfStatement(const IfStatement* ast){}
+void ASTVisitor::ProcessWhileStatement(const WhileStatement* ast){}
 void ASTVisitor::Dispatch(AST* ast){
 	switch(ast->GetASTNodeType()){
 		case ASTNodeType::EXPRESSION: this->ProcessExpression(dynamic_cast<Expression*>(ast)); break;
 		case ASTNodeType::INTEGER_LITERAL: this->ProcessIntegerLiteral(dynamic_cast<IntegerLiteral*>(ast)); break;
 		case ASTNodeType::BOOLEAN_LITERAL: this->ProcessBooleanLiteral(dynamic_cast<BooleanLiteral*>(ast)); break;
 		case ASTNodeType::IDENTIFIER: this->ProcessIdentifier(dynamic_cast<Identifier*>(ast)); break;
+		case ASTNodeType::STATEMENT_LIST: this->ProcessStatementList(dynamic_cast<StatementList*>(ast)); break;
+		case ASTNodeType::IF_STATEMENT: this->ProcessIfStatement(dynamic_cast<IfStatement*>(ast)); break;
+		case ASTNodeType::WHILE_STATEMENT: this->ProcessWhileStatement(dynamic_cast<WhileStatement*>(ast)); break;
 		default: Logger::Log(Logger::Type::ERROR, "Unknown ASTNodeType ", ast->GetASTNodeType());
 	}
 }
@@ -28,6 +34,7 @@ void ASTVisitor_BFS::Visit(AST* ast){
 			Q.push(child);
 	}
 }
+
 void ASTVisitor_DFS::Visit(AST* ast){
 	this->Dispatch(ast);
 	for(AST* child : ast->GetChildren())

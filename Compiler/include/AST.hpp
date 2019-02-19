@@ -9,7 +9,10 @@ public:
 		EXPRESSION,
 		INTEGER_LITERAL,
 		BOOLEAN_LITERAL,
-		IDENTIFIER
+		IDENTIFIER,
+		STATEMENT_LIST,
+		IF_STATEMENT,
+		WHILE_STATEMENT
 	};
 protected:
 	std::vector<AST*> children;
@@ -25,6 +28,47 @@ public:
 	virtual Type GetASTNodeType() const  = 0;
 };
 typedef AST::Type ASTNodeType;
+
+/***** StatementList *****/
+class StatementList : public AST{
+public:
+	StatementList() = default;
+	StatementList(const StatementList& obj) = default;
+	StatementList(StatementList&& obj) = default;
+
+	StatementList& operator=(const StatementList& obj) = default;
+
+	virtual ASTNodeType GetASTNodeType() const;
+
+	void Append(AST* ast);
+};
+
+/***** If Statement *****/
+class IfStatement : public AST{
+public:
+	IfStatement() = default;
+	IfStatement(const IfStatement& obj) = default;
+	IfStatement(IfStatement&& obj) = default;
+	IfStatement(AST* condition, AST* trueClause);
+	IfStatement(AST* condition, AST* trueClause, AST* FalseClause);
+
+	IfStatement& operator=(const IfStatement& obj) = default;
+
+	virtual ASTNodeType GetASTNodeType() const;
+};
+
+/***** While Statement *****/
+class WhileStatement : public AST{
+public:
+	WhileStatement() = default;
+	WhileStatement(const WhileStatement& obj) = default;
+	WhileStatement(WhileStatement&& obj) = default;
+	WhileStatement(AST* condition, AST* body);
+
+	WhileStatement& operator=(const WhileStatement& obj) = default;
+
+	virtual ASTNodeType GetASTNodeType() const;
+};
 
 /***** Expression *****/
 class Expression : public AST{
@@ -51,7 +95,8 @@ public:
 		BITWISE_OR,
 		BITWISE_XOR,
 		SHIFT_LEFT,
-		SHIFT_RIGHT
+		SHIFT_RIGHT,
+		ASSIGNMENT
 	};
 public:
 	Operation op;

@@ -6,11 +6,9 @@
 - Make makefile support sub directories
 
 Need To Do Before Next Stage in the Bootstrap:
-	- Integer Arithmetic Operations (+, -, *, /, %)
-	- Boolean Operations (and, or, not, <, >, <=, >=, ==, !=)
-	- Bitwise Operations (~, &, |, ^, >>, <<)
+	- Operations (+, -, *, /, %, and, or, not, <, >, <=, >=, ==, !=, ~, &, |, ^, >>, <<, =)
 	- Control Statements (if, while)
-	- Variables (value, and pointers)
+	- Variables (value, and pointers, arrays)
 	- I/O (Console and Files)
 	- Functions, Structures, Classes
 	- Linking Multiple Files (or linking)

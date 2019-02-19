@@ -54,13 +54,19 @@ or															{return OR;}
 \<\<														{return SHIFT_LEFT;}
 \>\>														{return SHIFT_RIGHT;}
 
+	/*Assignment Operators*/
+=															{return ASSIGN;}
+
 	/*Punctuation*/
-[;]															{return SEMICOLON;}
-[(]															{return LEFT_PARENTHESIS;}
-[)]															{return RIGHT_PARENTHESIS;}
+;															{return SEMICOLON;}
+\(															{return LEFT_PARENTHESIS;}
+\)															{return RIGHT_PARENTHESIS;}
+\{															{return LEFT_CURLY_BRACKET;}
+\}															{return RIGHT_CURLY_BRACKET;}
 
 	/*Reserved Words*/
 if															{return IF;}
+else														{return ELSE;}
 while														{return WHILE;}
 
 	/*Integer Literal*/

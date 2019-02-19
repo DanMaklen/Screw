@@ -9,9 +9,30 @@ const vector<AST*>& AST::GetChildren() const{
 	return children;
 }
 
+/***** StatementList *****/
+ASTNodeType StatementList::GetASTNodeType() const{
+	return ASTNodeType::STATEMENT_LIST;
+}
+void StatementList::Append(AST* ast){
+	this->children.push_back(ast);
+}
+
+/***** IfStatement *****/
+IfStatement::IfStatement(AST* condition, AST* trueClause) : AST({condition, trueClause}){}
+IfStatement::IfStatement(AST* condition, AST* trueClause, AST* falseClause) : AST({condition, trueClause, falseClause}){}
+ASTNodeType IfStatement::GetASTNodeType() const{
+	return ASTNodeType::IF_STATEMENT;
+}
+
+/***** WhileStatement *****/
+WhileStatement::WhileStatement(AST* condition, AST* body) : AST({condition, body}){}
+ASTNodeType WhileStatement::GetASTNodeType() const{
+	return ASTNodeType::WHILE_STATEMENT;
+}
+
 /***** Expression *****/
-Expression::Expression(Operation op, AST* operand) : op(op), AST({operand, nullptr, nullptr}){}
-Expression::Expression(Operation op, AST* operand1, AST* operand2) : op(op), AST({operand1, operand2, nullptr}){}
+Expression::Expression(Operation op, AST* operand) : op(op), AST({operand}){}
+Expression::Expression(Operation op, AST* operand1, AST* operand2) : op(op), AST({operand1, operand2}){}
 Expression::Expression(Operation op, AST* operand1, AST* operand2, AST* operand3) : op(op), AST({operand1, operand2, operand3}){}
 ASTNodeType Expression::GetASTNodeType() const{
 	return ASTNodeType::EXPRESSION;

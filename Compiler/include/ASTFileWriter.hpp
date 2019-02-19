@@ -20,6 +20,9 @@ private:
 	virtual void ProcessIntegerLiteral(const IntegerLiteral* ast);
 	virtual void ProcessBooleanLiteral(const BooleanLiteral* ast);
 	virtual void ProcessIdentifier(const Identifier* ast);
+	virtual void ProcessStatementList(const StatementList* ast);
+	virtual void ProcessIfStatement(const IfStatement* ast);
+	virtual void ProcessWhileStatement(const WhileStatement* ast);
 	virtual void Visit(AST* ast);
 public:
 	ASTFileWriter(const char* filePath);

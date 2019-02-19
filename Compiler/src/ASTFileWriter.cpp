@@ -13,6 +13,9 @@ string ASTFileWriter::GetString_ASTNodeType(ASTNodeType astNodeType){
 		case ASTNodeType::INTEGER_LITERAL: return "INTEGER_LITERAL";
 		case ASTNodeType::BOOLEAN_LITERAL: return "BOOLEAN_LITERAL";
 		case ASTNodeType::IDENTIFIER: return "IDENTIFIER";
+		case ASTNodeType::STATEMENT_LIST: return "STATEMENT_LIST";
+		case ASTNodeType::IF_STATEMENT: return "IF_STATEMENT";
+		case ASTNodeType::WHILE_STATEMENT: return "WHILE_STATEMENT";
 		default: return "?????UNKNOWN?????";
 	}
 }
@@ -40,6 +43,7 @@ string ASTFileWriter::GetString_ExpressionOperation(Expression::Operation operat
 		case Expression::Operation::BITWISE_XOR: return "^";
 		case Expression::Operation::SHIFT_LEFT: return "<<";
 		case Expression::Operation::SHIFT_RIGHT: return ">>";
+		case Expression::Operation::ASSIGNMENT: return "=";
 		default: return "?????UNKNOWN?????";
 	}
 }
@@ -92,4 +96,13 @@ void ASTFileWriter::ProcessIdentifier(const Identifier* ast){
 	astFile << "{";
 	astFile << "\"symbol\":\"" << ast->symbol << "\"";
 	astFile << "}";
+}
+void ASTFileWriter::ProcessStatementList(const StatementList* ast){
+	astFile << "{}";
+}
+void ASTFileWriter::ProcessIfStatement(const IfStatement* ast){
+	astFile << "{}";
+}
+void ASTFileWriter::ProcessWhileStatement(const WhileStatement* ast){
+	astFile << "{}";
 }

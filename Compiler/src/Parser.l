@@ -59,10 +59,18 @@ or															{return OR;}
 
 	/*Punctuation*/
 ;															{return SEMICOLON;}
+,															{return COMMA;}
 \(															{return LEFT_PARENTHESIS;}
 \)															{return RIGHT_PARENTHESIS;}
 \{															{return LEFT_CURLY_BRACKET;}
 \}															{return RIGHT_CURLY_BRACKET;}
+\[															{return LEFT_SQUARE_BRACKET;}
+\]															{return RIGHT_SQUARE_BRACKET;}
+
+	/*Builtin Types*/
+Integer|int													{return INT;}
+Character|char												{return CHAR;}
+Boolean|bool												{return BOOL;}
 
 	/*Reserved Words*/
 if															{return IF;}

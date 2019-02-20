@@ -17,17 +17,21 @@
 %token					EQ NEQ LT LTEQ GT GTEQ
 %token					BITWISE_NOT BITWISE_AND BITWISE_OR BITWISE_XOR SHIFT_LEFT SHIFT_RIGHT
 %token					ASSIGN
-%token					SEMICOLON LEFT_PARENTHESIS RIGHT_PARENTHESIS LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET
+%token					SEMICOLON COMMA
+%token					LEFT_PARENTHESIS RIGHT_PARENTHESIS LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET
 %token					IF ELSE WHILE
+%token					INT CHAR BOOL
 
 %token	<tokenString>	INTEGER_LITERAL BOOLEAN_LITERAL IDENTIFIER;
 
 %type	<astNode>		StatementList Statement
-%type	<astNode>		OpenStatement ClosedStatement TerminalStatement
+%type	<astNode>		OpenStatement ClosedStatement
 %type	<astNode>		R0Expression R1Expression R2Expression R3Expression R4Expression
 %type	<astNode>		R5Expression R6Expression R7Expression R8Expression R9Expression
 %type	<astNode>		R10Expression R11Expression
-%type	<astNode>		Expression TerminalExpression
+%type	<astNode>		TerminalStatement TerminalExpression
+%type	<astNode>		Identifier Expression TypeName
+%type	<astNode>		ExpressionStatement VariableDeclarationStatement
 
 %start Screw
 %%
@@ -38,10 +42,10 @@ Screw:
 	;
 StatementList:
 		{
-			$$ = new StatementList();
+			$$ = new ASTList(ASTList::Type::STATEMENT_LIST);
 		}
 	|	StatementList Statement{
-			if($2 != nullptr) dynamic_cast<StatementList*>($1)->Append($2);
+			if($2 != nullptr) dynamic_cast<ASTList*>($1)->Append($2);
 			$$ = $1;
 		}
 	;
@@ -55,13 +59,13 @@ Statement:
 	;
 OpenStatement:
 		IF LEFT_PARENTHESIS Expression RIGHT_PARENTHESIS Statement{
-			$$ = new IfStatement($3, $5);
+			$$ = new If($3, $5);
 		}
 	|	IF LEFT_PARENTHESIS Expression RIGHT_PARENTHESIS ClosedStatement ELSE OpenStatement{
-			$$ = new IfStatement($3, $5, $7);
+			$$ = new If($3, $5, $7);
 		}
 	|	WHILE LEFT_PARENTHESIS Expression RIGHT_PARENTHESIS OpenStatement{
-			$$ = new WhileStatement($3, $5);
+			$$ = new While($3, $5);
 		}
 	;
 ClosedStatement:
@@ -69,21 +73,48 @@ ClosedStatement:
 			$$ = $1;
 		}
 	|	IF LEFT_PARENTHESIS Expression RIGHT_PARENTHESIS ClosedStatement ELSE ClosedStatement{
-			$$ = new IfStatement($3, $5, $7);
+			$$ = new If($3, $5, $7);
 		}
 	|	WHILE LEFT_PARENTHESIS Expression RIGHT_PARENTHESIS ClosedStatement{
-			$$ = new WhileStatement($3, $5);
+			$$ = new While($3, $5);
 		}
 	;
 TerminalStatement:
 		SEMICOLON {
 			$$ = (AST*)nullptr;
 		}
-	|	Expression SEMICOLON{
+	|	ExpressionStatement{
+			$$ = $1;
+		}
+	|	VariableDeclarationStatement{
 			$$ = $1;
 		}
 	|	LEFT_CURLY_BRACKET StatementList RIGHT_CURLY_BRACKET{
 			$$ = $2;
+		}
+	;
+VariableDeclarationStatement:
+		TypeName Identifier SEMICOLON{
+			$$ = new VariableDeclaration($1, $2);
+		}
+	;
+ExpressionStatement:
+		Expression SEMICOLON{
+			$$ = $1;
+		}
+	;
+TypeName:
+		INT{
+			$$ = new TypeName(TypeName::Type::INTEGER);
+		}
+	|	CHAR{
+			$$ = new TypeName(TypeName::Type::CHARACTER);
+		}
+	|	BOOL{
+			$$ = new TypeName(TypeName::Type::BOOLEAN);
+		}
+	|	Identifier{
+			$$ = new TypeName($1);
 		}
 	;
 Expression:
@@ -227,11 +258,16 @@ TerminalExpression:
 	|	BOOLEAN_LITERAL{
 			$$ = new BooleanLiteral($1);
 		}
-	|	IDENTIFIER {
-			$$ = new Identifier($1);
+	|	Identifier {
+			$$ = $1;
 		}
 	|	LEFT_PARENTHESIS Expression RIGHT_PARENTHESIS{
 			$$ = $2;
+		}
+	;
+Identifier:
+		IDENTIFIER	{
+			$$ = new Identifier($1);
 		}
 	;
 %%

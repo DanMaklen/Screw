@@ -9,25 +9,26 @@ const vector<AST*>& AST::GetChildren() const{
 	return children;
 }
 
-/***** StatementList *****/
-ASTNodeType StatementList::GetASTNodeType() const{
-	return ASTNodeType::STATEMENT_LIST;
+/***** ListType *****/
+ASTList::ASTList(ASTList::Type listType) : listType(listType){}
+ASTNodeType ASTList::GetASTNodeType() const{
+	return ASTNodeType::AST_LIST;
 }
-void StatementList::Append(AST* ast){
+void ASTList::Append(AST* ast){
 	this->children.push_back(ast);
 }
 
-/***** IfStatement *****/
-IfStatement::IfStatement(AST* condition, AST* trueClause) : AST({condition, trueClause}){}
-IfStatement::IfStatement(AST* condition, AST* trueClause, AST* falseClause) : AST({condition, trueClause, falseClause}){}
-ASTNodeType IfStatement::GetASTNodeType() const{
-	return ASTNodeType::IF_STATEMENT;
+/***** If Statement *****/
+If::If(AST* condition, AST* trueClause) : AST({condition, trueClause}){}
+If::If(AST* condition, AST* trueClause, AST* falseClause) : AST({condition, trueClause, falseClause}){}
+ASTNodeType If::GetASTNodeType() const{
+	return ASTNodeType::IF;
 }
 
-/***** WhileStatement *****/
-WhileStatement::WhileStatement(AST* condition, AST* body) : AST({condition, body}){}
-ASTNodeType WhileStatement::GetASTNodeType() const{
-	return ASTNodeType::WHILE_STATEMENT;
+/***** While Statement *****/
+While::While(AST* condition, AST* body) : AST({condition, body}){}
+ASTNodeType While::GetASTNodeType() const{
+	return ASTNodeType::WHILE;
 }
 
 /***** Expression *****/
@@ -98,4 +99,17 @@ ASTNodeType BooleanLiteral::GetASTNodeType() const{
 Identifier::Identifier(const string& symbol) : symbol(symbol){}
 ASTNodeType Identifier::GetASTNodeType() const{
 	return ASTNodeType::IDENTIFIER;
+}
+
+/***** Variable Declaration *****/
+VariableDeclaration::VariableDeclaration(AST* typeName, AST* variable) : AST({typeName, variable}){}
+ASTNodeType VariableDeclaration::GetASTNodeType() const{
+	return ASTNodeType::VARIABLE_DECLARATION;
+}
+
+/***** Type Name *****/
+TypeName::TypeName(Type type) : type(type) {};
+TypeName::TypeName(AST* userDefinedType) : type(TypeName::Type::USER_DEFINED), AST({userDefinedType}){}
+ASTNodeType TypeName::GetASTNodeType() const{
+	return ASTNodeType::TYPE_NAME;
 }

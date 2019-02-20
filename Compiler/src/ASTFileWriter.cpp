@@ -13,9 +13,25 @@ string ASTFileWriter::GetString_ASTNodeType(ASTNodeType astNodeType){
 		case ASTNodeType::INTEGER_LITERAL: return "INTEGER_LITERAL";
 		case ASTNodeType::BOOLEAN_LITERAL: return "BOOLEAN_LITERAL";
 		case ASTNodeType::IDENTIFIER: return "IDENTIFIER";
-		case ASTNodeType::STATEMENT_LIST: return "STATEMENT_LIST";
-		case ASTNodeType::IF_STATEMENT: return "IF_STATEMENT";
-		case ASTNodeType::WHILE_STATEMENT: return "WHILE_STATEMENT";
+		case ASTNodeType::AST_LIST: return "AST_LIST";
+		case ASTNodeType::IF: return "IF";
+		case ASTNodeType::WHILE: return "WHILE";
+		default: return "?????UNKNOWN?????";
+	}
+}
+string ASTFileWriter::GetString_ASTListType(ASTList::Type listType){
+	switch(listType){
+		case ASTList::Type::STATEMENT_LIST: return "STATEMENT_LIST";
+		case ASTList::Type::EXPRESSION_LIST: return "EXPRESSION_LIST";
+		default: return "?????UNKNOWN?????";
+	}
+}
+string ASTFileWriter::GetString_TypeNameType(TypeName::Type typeNameType){
+	switch(typeNameType){
+		case TypeName::Type::INTEGER: return "INTEGER";
+		case TypeName::Type::CHARACTER: return "CHARACTER";
+		case TypeName::Type::BOOLEAN: return "BOOLEAN";
+		case TypeName::Type::USER_DEFINED: return "USER_DEFINED";
 		default: return "?????UNKNOWN?????";
 	}
 }
@@ -97,12 +113,22 @@ void ASTFileWriter::ProcessIdentifier(const Identifier* ast){
 	astFile << "\"symbol\":\"" << ast->symbol << "\"";
 	astFile << "}";
 }
-void ASTFileWriter::ProcessStatementList(const StatementList* ast){
+void ASTFileWriter::ProcessASTList(const ASTList* ast){
+	astFile << "{";
+	astFile << "\"listType\":\"" << GetString_ASTListType(ast->listType) << "\"";
+	astFile << "}";
+}
+void ASTFileWriter::ProcessIf(const If* ast){
 	astFile << "{}";
 }
-void ASTFileWriter::ProcessIfStatement(const IfStatement* ast){
+void ASTFileWriter::ProcessWhile(const While* ast){
 	astFile << "{}";
 }
-void ASTFileWriter::ProcessWhileStatement(const WhileStatement* ast){
+void ASTFileWriter::ProcessVariableDeclaration(const VariableDeclaration* ast){
 	astFile << "{}";
+}
+void ASTFileWriter::ProcessTypeName(const TypeName* ast){
+	astFile << "{";
+	astFile << "\"listType\":\"" << GetString_TypeNameType(ast->type) << "\"";
+	astFile << "}";
 }

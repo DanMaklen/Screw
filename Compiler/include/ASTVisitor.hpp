@@ -7,9 +7,11 @@ private:
 	virtual void ProcessIntegerLiteral(const IntegerLiteral* ast);
 	virtual void ProcessBooleanLiteral(const BooleanLiteral* ast);
 	virtual void ProcessIdentifier(const Identifier* ast);
-	virtual void ProcessStatementList(const StatementList* ast);
-	virtual void ProcessIfStatement(const IfStatement* ast);
-	virtual void ProcessWhileStatement(const WhileStatement* ast);
+	virtual void ProcessASTList(const ASTList* ast);
+	virtual void ProcessIf(const If* ast);
+	virtual void ProcessWhile(const While* ast);
+	virtual void ProcessVariableDeclaration(const VariableDeclaration* ast);
+	virtual void ProcessTypeName(const TypeName* ast);
 protected:
 	void Dispatch(AST* ast);
 public:

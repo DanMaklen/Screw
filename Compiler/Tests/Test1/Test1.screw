@@ -18,6 +18,3 @@ if (t)
 			s;
 		else
 			q;
-/*
-IF ( expr ) IF ( expr ) IF ( expr ) TStmt ELSE TStmt
-*/

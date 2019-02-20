@@ -7,18 +7,22 @@ void ASTVisitor::ProcessExpression(const Expression* ast){}
 void ASTVisitor::ProcessIntegerLiteral(const IntegerLiteral* ast){}
 void ASTVisitor::ProcessBooleanLiteral(const BooleanLiteral* ast){}
 void ASTVisitor::ProcessIdentifier(const Identifier* ast){}
-void ASTVisitor::ProcessStatementList(const StatementList* ast){}
-void ASTVisitor::ProcessIfStatement(const IfStatement* ast){}
-void ASTVisitor::ProcessWhileStatement(const WhileStatement* ast){}
+void ASTVisitor::ProcessASTList(const ASTList* ast){}
+void ASTVisitor::ProcessIf(const If* ast){}
+void ASTVisitor::ProcessWhile(const While* ast){}
+void ASTVisitor::ProcessVariableDeclaration(const VariableDeclaration* ast){}
+void ASTVisitor::ProcessTypeName(const TypeName* ast){}
 void ASTVisitor::Dispatch(AST* ast){
 	switch(ast->GetASTNodeType()){
 		case ASTNodeType::EXPRESSION: this->ProcessExpression(dynamic_cast<Expression*>(ast)); break;
 		case ASTNodeType::INTEGER_LITERAL: this->ProcessIntegerLiteral(dynamic_cast<IntegerLiteral*>(ast)); break;
 		case ASTNodeType::BOOLEAN_LITERAL: this->ProcessBooleanLiteral(dynamic_cast<BooleanLiteral*>(ast)); break;
 		case ASTNodeType::IDENTIFIER: this->ProcessIdentifier(dynamic_cast<Identifier*>(ast)); break;
-		case ASTNodeType::STATEMENT_LIST: this->ProcessStatementList(dynamic_cast<StatementList*>(ast)); break;
-		case ASTNodeType::IF_STATEMENT: this->ProcessIfStatement(dynamic_cast<IfStatement*>(ast)); break;
-		case ASTNodeType::WHILE_STATEMENT: this->ProcessWhileStatement(dynamic_cast<WhileStatement*>(ast)); break;
+		case ASTNodeType::AST_LIST: this->ProcessASTList(dynamic_cast<ASTList*>(ast)); break;
+		case ASTNodeType::IF: this->ProcessIf(dynamic_cast<If*>(ast)); break;
+		case ASTNodeType::WHILE: this->ProcessWhile(dynamic_cast<While*>(ast)); break;
+		case ASTNodeType::VARIABLE_DECLARATION: this->ProcessVariableDeclaration(dynamic_cast<VariableDeclaration*>(ast)); break;
+		case ASTNodeType::TYPE_NAME: this->ProcessTypeName(dynamic_cast<TypeName*>(ast)); break;
 		default: Logger::Log(Logger::Type::ERROR, "Unknown ASTNodeType ", ast->GetASTNodeType());
 	}
 }

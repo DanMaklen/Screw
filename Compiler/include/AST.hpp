@@ -10,9 +10,11 @@ public:
 		INTEGER_LITERAL,
 		BOOLEAN_LITERAL,
 		IDENTIFIER,
-		STATEMENT_LIST,
-		IF_STATEMENT,
-		WHILE_STATEMENT
+		AST_LIST,
+		IF,
+		WHILE,
+		VARIABLE_DECLARATION,
+		TYPE_NAME
 	};
 protected:
 	std::vector<AST*> children;
@@ -29,14 +31,17 @@ public:
 };
 typedef AST::Type ASTNodeType;
 
-/***** StatementList *****/
-class StatementList : public AST{
+/***** ASTList *****/
+class ASTList : public AST{
 public:
-	StatementList() = default;
-	StatementList(const StatementList& obj) = default;
-	StatementList(StatementList&& obj) = default;
-
-	StatementList& operator=(const StatementList& obj) = default;
+	enum Type{
+		STATEMENT_LIST,
+		EXPRESSION_LIST
+	};
+public:
+	Type listType;
+public:
+	ASTList(Type listType);
 
 	virtual ASTNodeType GetASTNodeType() const;
 
@@ -44,28 +49,18 @@ public:
 };
 
 /***** If Statement *****/
-class IfStatement : public AST{
+class If : public AST{
 public:
-	IfStatement() = default;
-	IfStatement(const IfStatement& obj) = default;
-	IfStatement(IfStatement&& obj) = default;
-	IfStatement(AST* condition, AST* trueClause);
-	IfStatement(AST* condition, AST* trueClause, AST* FalseClause);
-
-	IfStatement& operator=(const IfStatement& obj) = default;
+	If(AST* condition, AST* trueClause);
+	If(AST* condition, AST* trueClause, AST* FalseClause);
 
 	virtual ASTNodeType GetASTNodeType() const;
 };
 
 /***** While Statement *****/
-class WhileStatement : public AST{
+class While : public AST{
 public:
-	WhileStatement() = default;
-	WhileStatement(const WhileStatement& obj) = default;
-	WhileStatement(WhileStatement&& obj) = default;
-	WhileStatement(AST* condition, AST* body);
-
-	WhileStatement& operator=(const WhileStatement& obj) = default;
+	While(AST* condition, AST* body);
 
 	virtual ASTNodeType GetASTNodeType() const;
 };
@@ -134,12 +129,7 @@ public:
 	Size intSize;
 	bool signedInt;
 
-	IntegerLiteral() = default;
-	IntegerLiteral(const IntegerLiteral& obj) = default;
-	IntegerLiteral(IntegerLiteral&& obj) = default;
 	IntegerLiteral(const std::string& literal);
-
-	IntegerLiteral& operator=(const IntegerLiteral& obj) = default;
 
 	virtual ASTNodeType GetASTNodeType() const;
 };
@@ -149,12 +139,7 @@ class BooleanLiteral : public AST{
 public:
 	bool value;
 public:
-	BooleanLiteral() = default;
-	BooleanLiteral(const BooleanLiteral& obj) = default;
-	BooleanLiteral(BooleanLiteral&& obj) = default;
 	BooleanLiteral(const std::string& literal);
-
-	BooleanLiteral& operator=(const BooleanLiteral& obj) = default;
 
 	virtual ASTNodeType GetASTNodeType() const;
 };
@@ -164,12 +149,33 @@ class Identifier : public AST{
 public:
 	std::string symbol;
 public:
-	Identifier() = default;
-	Identifier(const Identifier& obj) = default;
-	Identifier(Identifier&& obj) = default;
 	Identifier(const std::string& symbol);
 
-	Identifier& operator=(const Identifier& obj) = default;
+	virtual ASTNodeType GetASTNodeType() const;
+};
+
+/***** Variable Declaration *****/
+class VariableDeclaration : public AST{
+public:
+	VariableDeclaration(AST* typeName, AST* variable);
+
+	virtual ASTNodeType GetASTNodeType() const;
+};
+
+/***** Type Name *****/
+class TypeName : public AST{
+public:
+	enum Type{
+		INTEGER,
+		CHARACTER,
+		BOOLEAN,
+		USER_DEFINED
+	};
+public:
+	Type type;
+public:
+	TypeName(Type type);
+	TypeName(AST* userDefinedType);
 
 	virtual ASTNodeType GetASTNodeType() const;
 };

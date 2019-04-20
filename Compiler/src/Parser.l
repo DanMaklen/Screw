@@ -82,14 +82,14 @@ while														{return WHILE;}
 (0[tT]){TDigit}+(`{TDigit}+)*([su]?int(8|16|32|64)?)?		|
 (0[oOcC]){ODigit}+(`{ODigit}+)*([su]?int(8|16|32|64)?)?		|
 (0[dD])?{DDigit}+(`{DDigit}+)*([su]?int(8|16|32|64)?)?		|
-(0[xXhH]){HDigit}+(`{HDigit}+)*([su]?int(8|16|32|64)?)?		{yylval.tokenString = yytext; return INTEGER_LITERAL;}
+(0[xXhH]){HDigit}+(`{HDigit}+)*([su]?int(8|16|32|64)?)?		{return INTEGER_LITERAL;}
 
 	/*Boolean Literal*/
 true														|
-false														{yylval.tokenString = yytext; return BOOLEAN_LITERAL;}
+false														{return BOOLEAN_LITERAL;}
 
 	/*Identifier*/
-[_a-zA-Z][_@a-zA-Z0-9]*										{yylval.tokenString = yytext; return IDENTIFIER;}
+[_a-zA-Z][_@a-zA-Z0-9]*										{return IDENTIFIER;}
 
 	/*Comments*/
 "/?"{nWS}*						/*Word Comment*/			{}

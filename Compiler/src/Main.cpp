@@ -13,7 +13,7 @@ int main(int argc, const char * argv[]){
 
 	AST* ast;
 	ast = parser.Parse(argv[1]);
-	ASTFileWriter astFile("./out/test.ast");
-	astFile.WriteAST(ast);
+	// ASTFileWriter astFile("./out/test.ast");
+	// astFile.WriteAST(ast);
 	return 0;
 }

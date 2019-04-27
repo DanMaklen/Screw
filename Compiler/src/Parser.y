@@ -28,7 +28,7 @@
 %%
 Screw:
 		StatementList{
-			Logger::Log(Logger::Type::DEBUG, "Parsed Successfully!");
+			ast = new If(nullptr, nullptr);
 		}
 	;
 StatementList:

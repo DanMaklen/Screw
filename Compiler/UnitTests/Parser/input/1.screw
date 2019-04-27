@@ -1,0 +1,6 @@
+/*Random Multi
+line Comment*/						//Multi-Line Comment
+a = b;								//Assignment
+b + c;								//Addition
+a + b /?y2 = d;						//Single Word Comment
+v = in3t - 3*x+f-3; d+3/5%3-d;		//Complex Equation

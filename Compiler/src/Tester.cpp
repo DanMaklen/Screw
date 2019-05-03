@@ -24,8 +24,9 @@ Tester::TestResultSummary Tester::Run(){
 	for(TestCase tc : dataSet){
 		AST* ast = parser.Parse(baseDir + "/" + tc.FilePath);
 		bool result = (ast != nullptr);
+		Logger::Log(Logger::INFO, "Tested:", tc.FilePath, result);
 		if(result != tc.Expected)
-			summary.failures.push_back(TestResult{baseDir + tc.FilePath, tc.Expected, ast==nullptr});
+			summary.failures.push_back(TestResult{baseDir + tc.FilePath, tc.Expected, result});
 		if(ast != nullptr) delete ast;
 	}
 	summary.passRate = 1 - 1.0 * summary.failures.size() / dataSet.size();

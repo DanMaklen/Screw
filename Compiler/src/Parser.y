@@ -19,17 +19,39 @@
 %token	ASSIGN
 %token	SEMICOLON COMMA
 %token	LEFT_PARENTHESIS RIGHT_PARENTHESIS LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET
-%token	IF ELSE WHILE
-%token	INT CHAR BOOL
+%token	IF ELSE WHILE CLASS
+%token	INT CHAR BOOL VOID
 
 %token	INTEGER_LITERAL BOOLEAN_LITERAL IDENTIFIER;
 
 %start Screw
 %%
 Screw:
-		StatementList{
+		DefinitionList{
 			ast = new If(nullptr, nullptr);
+			YYACCEPT;
 		}
+	;
+DefinitionList:
+	|	DefinitionList Definition
+	;
+Definition:
+		FunctionDefinition
+	|	ClassDefinition
+	;
+ClassDefinition:
+		CLASS Identifier LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET
+	;
+FunctionDefinition:
+		TypeName Identifier LEFT_PARENTHESIS FunctionArgumentList RIGHT_PARENTHESIS Statement
+	|	TypeName Identifier LEFT_PARENTHESIS RIGHT_PARENTHESIS Statement
+	;
+FunctionArgumentList:
+		FunctionArgument
+	|	FunctionArgumentList COMMA FunctionArgument
+	;
+FunctionArgument:
+		TypeName Identifier
 	;
 StatementList:
 	|	StatementList Statement
@@ -50,20 +72,18 @@ ClosedStatement:
 	;
 TerminalStatement:
 		SEMICOLON
-	|	ExpressionStatement
-	|	VariableDeclarationStatement
+	|	Expression SEMICOLON
+	|	VariableDeclaration SEMICOLON
 	|	LEFT_CURLY_BRACKET StatementList RIGHT_CURLY_BRACKET
 	;
-VariableDeclarationStatement:
-		TypeName Identifier SEMICOLON
-	;
-ExpressionStatement:
-		Expression SEMICOLON
+VariableDeclaration:
+		TypeName Identifier
 	;
 TypeName:
 		INT
 	|	CHAR
 	|	BOOL
+	|	VOID
 	|	Identifier
 	;
 Expression:

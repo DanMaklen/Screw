@@ -71,11 +71,13 @@ or															{return OR;}
 Integer|int													{return INT;}
 Character|char												{return CHAR;}
 Boolean|bool												{return BOOL;}
+void														{return VOID;}
 
 	/*Reserved Words*/
 if															{return IF;}
 else														{return ELSE;}
 while														{return WHILE;}
+class														{return CLASS;}
 
 	/*Integer Literal*/
 (0[bB]){BDigit}+(`{BDigit}+)*([su]?int(8|16|32|64)?)?		|

@@ -1,0 +1,12 @@
+void sub1(int x, bool y, ClassA a){
+	x = x -1;
+}
+
+void main(){
+	int x;
+	x = 100;
+	while(x != 0){
+		print(x);
+		sub1(x);
+	}
+}

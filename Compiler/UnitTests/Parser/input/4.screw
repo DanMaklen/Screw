@@ -1,3 +1,14 @@
 class classA{
+	int x;
+	int function(){
 
+	}
+	int y;
+	void function2(){
+
+	}
+	int z;
+	bool fun3(shug s){
+
+	}
 }

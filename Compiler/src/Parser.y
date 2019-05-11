@@ -19,7 +19,8 @@
 %token	ASSIGN
 %token	SEMICOLON COMMA
 %token	LEFT_PARENTHESIS RIGHT_PARENTHESIS LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET
-%token	IF ELSE WHILE CLASS
+%token	IF ELSE WHILE
+%token	CLASS
 %token	INT CHAR BOOL VOID
 
 %token	INTEGER_LITERAL BOOLEAN_LITERAL IDENTIFIER;
@@ -40,7 +41,26 @@ Definition:
 	|	ClassDefinition
 	;
 ClassDefinition:
-		CLASS Identifier LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET
+		CLASS Identifier LEFT_CURLY_BRACKET ClassMemberList RIGHT_CURLY_BRACKET
+	;
+ClassMemberList:
+	|	ClassMemberList ClassMember
+	;
+ClassMember:
+		MethodClassMember
+	|	AttributeClassMember
+	;
+MethodClassMember:
+		FunctionDefinition
+	|	ClassMemberAccessModifier FunctionDefinition
+	;
+AttributeClassMember:
+		VariableDeclaration SEMICOLON
+	|	ClassMemberAccessModifier VariableDeclaration SEMICOLON
+	;
+ClassMemberAccessModifier:
+		PRIVATE
+	|	PUBLIC
 	;
 FunctionDefinition:
 		TypeName Identifier LEFT_PARENTHESIS FunctionArgumentList RIGHT_PARENTHESIS Statement
@@ -51,7 +71,7 @@ FunctionArgumentList:
 	|	FunctionArgumentList COMMA FunctionArgument
 	;
 FunctionArgument:
-		TypeName Identifier
+		VariableDeclaration
 	;
 StatementList:
 	|	StatementList Statement

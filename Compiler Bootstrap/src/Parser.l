@@ -78,6 +78,9 @@ if															{return IF;}
 else														{return ELSE;}
 while														{return WHILE;}
 class														{return CLASS;}
+public														{return PUBLIC;}
+protected													{return PROTECTED;}
+private														{return PRIVATE;}
 
 	/*Integer Literal*/
 (0[bB]){BDigit}+(`{BDigit}+)*([su]?int(8|16|32|64)?)?		|

@@ -20,7 +20,7 @@
 %token	SEMICOLON COMMA
 %token	LEFT_PARENTHESIS RIGHT_PARENTHESIS LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET
 %token	IF ELSE WHILE
-%token	CLASS
+%token	CLASS PUBLIC PRIVATE PROTECTED
 %token	INT CHAR BOOL VOID
 
 %token	INTEGER_LITERAL BOOLEAN_LITERAL IDENTIFIER;
@@ -51,16 +51,15 @@ ClassMember:
 	|	AttributeClassMember
 	;
 MethodClassMember:
-		FunctionDefinition
-	|	ClassMemberAccessModifier FunctionDefinition
+		ClassMemberAccessModifier FunctionDefinition
 	;
 AttributeClassMember:
-		VariableDeclaration SEMICOLON
-	|	ClassMemberAccessModifier VariableDeclaration SEMICOLON
+		ClassMemberAccessModifier VariableDeclaration SEMICOLON
 	;
 ClassMemberAccessModifier:
-		PRIVATE
+	|	PRIVATE
 	|	PUBLIC
+	|	PROTECTED
 	;
 FunctionDefinition:
 		TypeName Identifier LEFT_PARENTHESIS FunctionArgumentList RIGHT_PARENTHESIS Statement

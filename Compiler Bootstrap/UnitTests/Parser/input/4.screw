@@ -3,12 +3,12 @@ class classA{
 	int function(){
 
 	}
-	int y;
-	void function2(){
+	private int y;
+	public void function2(){
 
 	}
-	int z;
-	bool fun3(shug s){
+	protected int z;
+	private bool fun3(shug s){
 
 	}
 }

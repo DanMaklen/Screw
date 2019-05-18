@@ -19,8 +19,8 @@
 %token	ASSIGN
 %token	SEMICOLON COMMA
 %token	LEFT_PARENTHESIS RIGHT_PARENTHESIS LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET
-%token	IF ELSE WHILE
-%token	CLASS PUBLIC PRIVATE PROTECTED
+%token	IF ELSE WHILE RETURN
+%token	CLASS PUBLIC PRIVATE PROTECTED INTERFACE IMPLEMENTS
 %token	INT CHAR BOOL VOID
 
 %token	INTEGER_LITERAL BOOLEAN_LITERAL IDENTIFIER;
@@ -39,9 +39,24 @@ DefinitionList:
 Definition:
 		FunctionDefinition
 	|	ClassDefinition
+	|	InterfaceDefinition
+	;
+InterfaceDefinition:
+		INTERFACE Identifier LEFT_CURLY_BRACKET InterfaceMemberList RIGHT_CURLY_BRACKET
+	;
+InterfaceMemberList:
+	|	InterfaceMemberList InterfaceMember
+	;
+InterfaceMember:
+		FunctionDeclaration
+	|	PUBLIC FunctionDeclaration
 	;
 ClassDefinition:
-		CLASS Identifier LEFT_CURLY_BRACKET ClassMemberList RIGHT_CURLY_BRACKET
+		CLASS Identifier InheritDeclaration LEFT_CURLY_BRACKET ClassMemberList RIGHT_CURLY_BRACKET
+	;
+InheritDeclaration:
+	|	IMPLEMENTS
+ TypeNameList
 	;
 ClassMemberList:
 	|	ClassMemberList ClassMember
@@ -61,9 +76,13 @@ ClassMemberAccessModifier:
 	|	PUBLIC
 	|	PROTECTED
 	;
+FunctionDeclaration:
+		TypeName Identifier LEFT_PARENTHESIS FunctionArgumentList RIGHT_PARENTHESIS SEMICOLON
+	|	TypeName Identifier LEFT_PARENTHESIS RIGHT_PARENTHESIS SEMICOLON
+	;
 FunctionDefinition:
-		TypeName Identifier LEFT_PARENTHESIS FunctionArgumentList RIGHT_PARENTHESIS Statement
-	|	TypeName Identifier LEFT_PARENTHESIS RIGHT_PARENTHESIS Statement
+		TypeName Identifier LEFT_PARENTHESIS FunctionArgumentList RIGHT_PARENTHESIS StatementBlock
+	|	TypeName Identifier LEFT_PARENTHESIS RIGHT_PARENTHESIS StatementBlock
 	;
 FunctionArgumentList:
 		FunctionArgument
@@ -91,12 +110,20 @@ ClosedStatement:
 	;
 TerminalStatement:
 		SEMICOLON
+	|	RETURN Expression SEMICOLON
 	|	Expression SEMICOLON
 	|	VariableDeclaration SEMICOLON
-	|	LEFT_CURLY_BRACKET StatementList RIGHT_CURLY_BRACKET
+	|	StatementBlock
+	;
+StatementBlock:
+		LEFT_CURLY_BRACKET StatementList RIGHT_CURLY_BRACKET
 	;
 VariableDeclaration:
 		TypeName Identifier
+	;
+TypeNameList:
+		TypeName
+	|	TypeNameList COMMA TypeName
 	;
 TypeName:
 		INT

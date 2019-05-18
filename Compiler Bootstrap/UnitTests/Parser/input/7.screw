@@ -1,0 +1,4 @@
+interface classA {
+	public void function2();
+	bool fun3(shug s);
+}

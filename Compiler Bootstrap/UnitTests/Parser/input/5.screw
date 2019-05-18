@@ -1,0 +1,14 @@
+interface classA{
+	int x;
+	int function(){
+
+	}
+	private int y;
+	public void function2(){
+
+	}
+	protected int z;
+	private bool fun3(shug s){
+
+	}
+}

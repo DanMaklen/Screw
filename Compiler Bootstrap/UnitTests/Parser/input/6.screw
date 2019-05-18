@@ -1,0 +1,8 @@
+interface classA{
+	int function(){
+
+	}
+	public void function2(){
+
+	}
+}
